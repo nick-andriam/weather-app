@@ -106,13 +106,22 @@ h1.temp {
   display: grid;
   place-items: center;
   margin: 0.4rem;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 20px 15px 20px;
   background-color: #2f3032;
   box-shadow: 2px 2px 30px rgb(28, 28, 28);
 }
 
+.inner-card:hover {
+  cursor: pointer;
+  background-color: #474849;
+}
+
 .inner-value {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  text-align: center;
+}
+.delete:hover {
+  cursor: pointer;
 }

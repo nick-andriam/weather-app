@@ -38,7 +38,7 @@ let weather = {
     document.querySelector(".icon").src =
       "https://openweathermap.org/img/wn/" + icon + ".png";
     document.querySelector(".description").innerText = description;
-    document.querySelector(".temp").innerText = temp + "°C";
+    document.querySelector(".temp").innerText = Math.round(temp) + "°C";
     document.querySelector(".humidity").innerText =
       "Humidity: " + humidity + "%";
     document.querySelector(".wind").innerText =
@@ -70,7 +70,6 @@ function displayList() {
     createElement(location)
   })
 }
-
 // ------------------- Add to favorites -----------------------
 function addToFavorite() {
 
@@ -80,7 +79,7 @@ function addToFavorite() {
     favorites.push(usedName)
     localStorage.setItem("favorites", JSON.stringify(favorites))
   } else {
-    alert('Name already exists')
+    alert(`${usedName} already exists in your favorites`)
   }
 }
 
@@ -101,8 +100,8 @@ function createElement(text) {
   // Delete button and its function
   let deleteButton = new Image()
   deleteButton.src = "../svg/delete.svg"
-  deleteButton.width = "25"
-  deleteButton.height = "25"
+  deleteButton.width = "22"
+  deleteButton.height = "22"
   deleteButton.alt = "Delete Button"
   deleteButton.id = `${uuid}`
   deleteButton.classList.add("delete")
@@ -110,6 +109,12 @@ function createElement(text) {
   // Function to delete a location
   deleteButton.onclick = function (e) {
     deleteFavorite(e.target.id)
+  }
+
+  // On clicking a favorite location
+  innerCard.onclick = function (e) {
+    usedName = innerCard.innerText
+    weather.fetchWeather(innerCard.innerText)
   }
 
   // Appending child
@@ -141,6 +146,9 @@ function deleteFavorite(id) {
   // Updating localStorage
   localStorage.setItem("favorites", JSON.stringify(favorites))
 }
+
+
+//------------ On Clicking Favorite Button --------------
 
 document.querySelector(".favorite-button").addEventListener("click", function () {
   addToFavorite()
